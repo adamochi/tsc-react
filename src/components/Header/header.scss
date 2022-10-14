@@ -1,0 +1,20 @@
+@keyframes underlineParty {
+  from {
+    width: 1px;
+    border-bottom: 2px solid rgb(190, 170, 238);
+  }
+  to {
+    text-align: center;
+    width: calc(100px + 50vmin);
+    border-bottom: 2px solid rgba(11, 255, 235, 0.651);
+    border-collapse: separate;
+  }
+}
+
+.main-header {
+  font-family: "Merienda", cursive;
+  font-weight: 400;
+  height: calc(1.4em + 3vmin);
+  font-size: calc(1em + 5vmin);
+  animation: 1s underlineParty forwards;
+}

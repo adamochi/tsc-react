@@ -3,6 +3,7 @@ import "./potato.scss";
 
 type TODO = {
   name: string;
+  age?: number;
   readonly id: number;
 };
 const Potato = () => {
@@ -12,7 +13,6 @@ const Potato = () => {
 
   useEffect(() => {
     const saved = localStorage.getItem("todos");
-    console.dir(saved);
     if (saved !== null) {
       const parsed = JSON.parse(saved);
       return setTodos(parsed);
@@ -45,10 +45,37 @@ const Potato = () => {
     setTodo(e.target.value.trim());
   };
 
-  const handleRemove = (e: { target: { id: string } }) => {
+  const handleRemove = (e: any) => {
     const id = JSON.parse(e.target.id);
-    setTodos(todos.filter((item) => item.id !== id));
+    return setTodos(todos.filter((item) => item.id !== id));
   };
+  //
+  function createRipple(event) {
+    const button = event.currentTarget;
+
+    const circle = document.createElement("span");
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+    circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+    circle.classList.add("ripple");
+
+    const ripple = button.getElementsByClassName("ripple")[0];
+
+    if (ripple) {
+      ripple.remove();
+    }
+
+    button.appendChild(circle);
+  }
+
+  const buttons = document.getElementsByTagName("button");
+  for (const button of buttons) {
+    button.addEventListener("click", createRipple);
+  }
+  //
 
   return (
     <div className="App">
