@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+    ## Call Signatures
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+                ↓↓        ↓↓
 
-In the project directory, you can run:
+function add(a:number, b:number) {
+return a + b
+}
+↓↓↓
+type Add = (a:number, b:number) => number;
 
-### `npm start`
+        const add:Add = (a, b) => a + b;
+                  ↑↑↑
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This way I can explain the type of my function
+before implementing.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Overloading is why this long way exists.
 
-### `npm test`
+Very bad example:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+        type Add = {
+            (a: number, b:number) : number
+            (a: number, b:string) : number
+        }
+        const add: Add = (a, b) => {
+            if(typeof b === "string) return a;
+            return a + b;
+        }
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    type: Add = {
+        (a:number, b:number) :number
+        (a:number, b:number, c:number) :number
+    }
+    const add:Add = (a,b,c?:number) => {
+        if(c) return a + b + can
+        return a + b
+    }
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## In NextJS
 
-### `npm run eject`
+        Router.push({
+            path: "/home",
+            state: 1
+        })
+        .push("/home")
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Polymorphism - blows my mind!@@
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    poly means many:several:much:multi-
+    morhos means form,structure
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+        type SuperPrint = {
+            (arr: number[]):void
+            (arr: boolean[]):void
+            (arr: string[]):void
+        }
 
-## Learn More
+        const superPrint: SuperPrint = (arr) => {
+            arr.forEach(i => console.log(i))
+        }
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+        superPrint([1,2,3,4])
+        superPrint([true,false,true,true])
+        superPrint(["a","b","c","d"])
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+// I want it to to work with any type. . .
+superPring([1,2,true,false,"potato"])
 
-### Code Splitting
+    ↓↓↓ So we need to use generics ↓↓↓
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    type SuperPrint = {
+        <TypePlaceholder>(arr: TypePlaceholder[]):void
+                        or for example
+        <T>(arr: T[]) => T
 
-### Analyzing the Bundle Size
+        we don't have to write every single possible combination.
+    }
+    const superPrint: SuperPrint = (arr) => arr[0]
+    const a = superPrint([1,2,true,false,"potato"])
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    This is polymorphism !!!
 
-### Making a Progressive Web App
+## this is the hardest way to write generics btw. . .
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Recap
 
-### Advanced Configuration
+        could do :any but this doesn't protect you anymore!
+        which is we use generics and have to do <T>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+    order doesn't matter here ↓ but here ↓ it does
+        type SuperPrint = <T, M>(a: T[], b:M) => T
+    typescript learns
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Conclusion on Generics.
