@@ -1,20 +1,16 @@
     ## Call Signatures
+                    ↓↓        ↓↓
 
----
-
-                ↓↓        ↓↓
-
-function add(a:number, b:number) {
-return a + b
-}
-↓↓↓
-type Add = (a:number, b:number) => number;
+        function add(a:number, b:number) {
+            return a + b
+        }
+    ↓↓↓
+    type Add = (a:number, b:number) => number;
 
         const add:Add = (a, b) => a + b;
                   ↑↑↑
-
-This way I can explain the type of my function
-before implementing.
+    This way I can explain the type of my function
+    before implementing.
 
 ## Overloading is why this long way exists.
 
