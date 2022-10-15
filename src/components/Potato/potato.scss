@@ -26,6 +26,8 @@
       margin: 0 auto;
     }
     #todos_div {
+      opacity: 0;
+      animation: 0.8s fadeInRight forwards;
       display: flex;
       justify-content: space-between;
       background-color: paleturquoise;

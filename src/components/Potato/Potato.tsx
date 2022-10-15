@@ -42,7 +42,7 @@ const Potato = () => {
     return (banana.current.value = "");
   };
 
-  const handleOnChange = (e: { target: { value: string } }) => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodo(e.target.value.trim());
   };
 
@@ -77,9 +77,7 @@ const Potato = () => {
     button.addEventListener("click", createRipple);
   }
   //
-  const handleChecked: any = (e: {
-    target: { id: string; checked: boolean; nextSibling: HTMLElement };
-  }) => {
+  const handleChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
     const id = JSON.parse(e.target.id);
     const itemChecked = e.target.checked;
     let thisTODO = todos.filter((todo) => todo.id === id);
