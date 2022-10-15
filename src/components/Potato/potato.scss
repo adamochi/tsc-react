@@ -11,6 +11,7 @@
   align-items: center;
   flex-direction: column;
   gap: 20px;
+  overflow: hidden;
   .todos_outer-div {
     width: calc(100% - 40vw);
     display: grid;
@@ -55,15 +56,16 @@
     display: flex;
     align-items: center;
     gap: 10px;
-
+    overflow: hidden;
+    height: 40px;
     #input {
+      height: 19px;
       border: none;
       outline: none;
       padding: 10px 25px 10px 20px;
       border-radius: 100vmax;
       text-align: center;
     }
-
     button {
       width: fit-content;
       position: relative;
@@ -77,6 +79,7 @@
       border-radius: 0.25rem;
       box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3); /* black with 30% opacity */
       cursor: pointer;
+      box-sizing: border-box;
     }
   }
 }
