@@ -25,7 +25,7 @@ const Potato = () => {
     return localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  const handleSubmit = (event: any): any => {
+  const handleSubmit = (event: { preventDefault: any }) => {
     event.preventDefault();
     const onlySpaces = (str: string) => {
       return str.trim().length === 0;
