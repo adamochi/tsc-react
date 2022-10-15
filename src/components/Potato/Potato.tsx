@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./potato.scss";
 
-type TODO = {
+interface TODO {
   name: string;
   checked: boolean;
   readonly id: number;
-};
+}
+
 const Potato = () => {
   const [todo, setTodo] = useState("");
   const [todos, setTodos] = useState([] as TODO[]);
