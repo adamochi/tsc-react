@@ -4,7 +4,7 @@ abstract class User {
     private lastName: string,
     public nickname: string
   ) {}
-  abstract getNickname(): void;
+  abstract getNickname(): void; // the return type of the method
   getFullName() {
     return `${(this.firstName, this.lastName)}`;
   }
@@ -18,4 +18,4 @@ class Player extends User {
 }
 const adam = new Player("Adam", "Sullivan", "adamochi");
 console.log(adam.nickname);
-console.log(adam.getFullName()); // could make this function private as well so this console.log() wouldn't work
+console.log(adam.getFullName()); // could make this function inside of the abstract class ↑↑ private as well so this console.log() wouldn't work

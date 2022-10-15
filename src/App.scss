@@ -43,3 +43,33 @@ button {
   // animation-fill-mode: forwards;
   transform: scale(200%);
 }
+input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  appearance: none;
+  display: grid;
+  place-content: center;
+  outline: 1px solid rgb(151, 151, 151);
+  border-radius: 1px;
+  background-color: rgb(170, 179, 255);
+}
+input[type="checkbox"]:checked {
+  background-color: rgb(5, 255, 180);
+}
+input[type="checkbox"]::before {
+  background-color: #6f00ff;
+  transform-origin: bottom left;
+  clip-path: polygon(15% 55%, 0% 70%, 30% 100%, 95% 10%, 80% 0, 30% 70%);
+}
+input[type="checkbox"]::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  transform: scale(0);
+  transition: 80ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1.4);
+}

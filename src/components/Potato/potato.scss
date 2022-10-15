@@ -17,6 +17,9 @@
     justify-content: center;
     grid-template-columns: 50% 50%;
     gap: 0.8em;
+    @media screen and (max-width: 1500px) {
+      grid-template-columns: 1fr;
+    }
     @media screen and (max-width: 850px) {
       width: calc(100% - 10vw);
       grid-template-columns: 1fr;
@@ -31,11 +34,17 @@
       padding: 10px;
       align-items: center;
       font-weight: normal;
-      .item_span {
-        font-size: calc(8px + 2vmin);
-      }
-      .time-of_span {
-        font-size: calc(4px + 1vmin);
+      div {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .item_span {
+          font-size: calc(8px + 2vmin);
+        }
+        .time-of_span {
+          font-size: calc(4px + 1vmin);
+        }
       }
     }
   }

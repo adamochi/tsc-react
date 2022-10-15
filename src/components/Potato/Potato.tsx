@@ -3,7 +3,7 @@ import "./potato.scss";
 
 type TODO = {
   name: string;
-  age?: number;
+  checked: boolean;
   readonly id: number;
 };
 const Potato = () => {
@@ -34,6 +34,7 @@ const Potato = () => {
     if (data === "" || onlySpaces(data)) return;
     const newTodoObj: TODO = {
       name: todo,
+      checked: false,
       id: Date.now(),
     };
     setTodos([newTodoObj, ...todos]);
@@ -76,6 +77,26 @@ const Potato = () => {
     button.addEventListener("click", createRipple);
   }
   //
+  const handleChecked: any = (e: {
+    target: { id: string; checked: boolean; nextSibling: HTMLElement };
+  }) => {
+    const id = JSON.parse(e.target.id);
+    const itemChecked = e.target.checked;
+    let thisTODO = todos.filter((todo) => todo.id === id);
+
+    itemChecked ? (thisTODO[0].checked = true) : (thisTODO[0].checked = false);
+    const saveChecked = todos.map((todo) => {
+      if (todo.id === id) {
+        if (!thisTODO[0].checked) {
+          return { ...todo, checked: false };
+        } else {
+          return { ...todo, checked: true };
+        }
+      }
+      return todo;
+    });
+    setTodos(saveChecked);
+  };
 
   return (
     <div className="App">
@@ -94,7 +115,23 @@ const Potato = () => {
         {todos.map((item) => (
           <div id="todos_div" key={item.id}>
             <div>
-              <span className="item_span">{item.name}</span>
+              <input
+                type="checkbox"
+                id={`${item.id}`}
+                onChange={handleChecked}
+                checked={item.checked}
+              />
+              <span
+                className="item_span"
+                style={{
+                  textDecoration: item.checked ? "line-through" : "",
+                  textDecorationColor: item.checked
+                    ? "rgba(5, 255, 255, 0.7)"
+                    : "",
+                }}
+              >
+                {item.name}
+              </span>
               <span className="time-of_span">
                 {" "}
                 @ {new Date(item.id).getHours().toString().padStart(2, "0")}:
