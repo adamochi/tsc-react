@@ -46,13 +46,14 @@ const Potato = () => {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodo(e.target.value.trim());
   };
-
+  ////////////////////////////////////////////////////////////////////////////////////
   const handleRemove = (e: any) => {
     const id = JSON.parse(e.target.id);
     return setTodos(todos.filter((item) => item.id !== id));
   };
+  ////////////////////////////////////////////////////////////////////////////////////
   //
-  function createRipple(event) {
+  function createRipple(event: any) {
     const button = event.currentTarget;
 
     const circle = document.createElement("span");
@@ -72,7 +73,6 @@ const Potato = () => {
 
     button.appendChild(circle);
   }
-
   const buttons = document.getElementsByTagName("button");
   for (const button of buttons) {
     button.addEventListener("click", createRipple);

@@ -3,7 +3,7 @@ import "./App.scss";
 import React from "react";
 import Header from "./components/Header/AnimatedLetters.jsx";
 import Potato from "./components/Potato/Potato.tsx";
-// import { fetchData } from "./api";
+// import { fetchData } from "./practice_api";
 
 // const resource = fetchData();
 
