@@ -114,26 +114,30 @@ const Potato = () => {
         {todos.map((item) => (
           <div id="todos_div" key={item.id}>
             <div>
-              <input
-                type="checkbox"
-                id={`${item.id}`}
-                onChange={handleChecked}
-                checked={item.checked}
-              />
-              <span
-                className="item_span"
-                style={{
-                  textDecoration: item.checked ? "line-through" : "",
-                  textDecorationColor: item.checked
-                    ? "rgba(5, 255, 255, 0.7)"
-                    : "",
-                }}
-              >
-                {item.name}
-              </span>
+              <div>
+
+                <input
+                  type="checkbox"
+                  id={`${item.id}`}
+                  onChange={handleChecked}
+                  checked={item.checked}
+                />
+                <span
+                  className="item_span"
+                  style={{
+                    textDecoration: item.checked ? "line-through" : "",
+                    textDecorationColor: item.checked
+                      ? "rgba(5, 255, 255, 0.7)"
+                      : "",
+                  }}
+                >
+                  {item.name}
+                </span>
+              </div>
               <span className="time-of_span">
-                {" "}
-                @ {new Date(item.id).getHours().toString().padStart(2, "0")}:
+                {new Date(item.id).toUTCString().slice(4, 11)}
+                {` @ `}
+                {new Date(item.id).getHours().toString().padStart(2, "0")}:
                 {new Date(item.id).getMinutes().toString().padStart(2, "0")}
                 {new Date(item.id).getHours() > 11 ? "pm" : "am"}
               </span>
